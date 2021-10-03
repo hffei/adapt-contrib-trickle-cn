@@ -1,0 +1,509 @@
+{
+  "type": "object",
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "id": "http://jsonschema.net",
+  "required": false,
+  "globals": {
+    "incompleteContent": {
+      "type": "string",
+      "required": true,
+      "default": "There is incomplete content above. You must complete this before you can proceed through the course.",
+      "inputType": "Text",
+      "validators": [],
+      "translatable": true
+    }
+  },
+  "properties": {
+    "pluginLocations": {
+      "type": "object",
+      "required": true,
+      "properties": {
+        "config": {
+          "type": "object",
+          "properties": {
+            "_trickle": {
+              "title":"涓流",
+              "type": "object",
+              "required": false,
+              "legend": "Trickle",
+              "properties": {
+                "_completionAttribute": {
+                  "type": "string",
+                  "required": false,
+                  "enum": ["_isInteractionComplete", "_isComplete"],
+                  "default": "_isComplete",
+                  "title": "完成属性",
+                  "inputType": {"type": "Select", "options":["_isInteractionComplete", "_isComplete"]},
+                  "validators": [],
+                  "help": "Set which attribute is used to determine completion"
+                }
+              }
+            }
+          }
+        },
+        "course": {
+          "type": "object"
+        },
+        "contentobject": {
+          "type": "object"
+        },
+        "article": {
+          "type": "object",
+          "properties": {
+            "_trickle": {
+              "title": "涓流",
+              "type": "object",
+              "required": false,
+              "legend": "Trickle",
+              "properties": {
+                "_isEnabled": {
+                  "type": "boolean",
+                  "required": false,
+                  "title": "启用",
+                  "inputType": "Checkbox",
+                  "validators": []
+                },
+                "_autoScroll": {
+                  "type": "boolean",
+                  "required": false,
+                  "title": "自动滚动",
+                  "inputType": "Checkbox",
+                  "validators": []
+                },
+                "_scrollDuration": {
+                  "type": "number",
+                  "required": true,
+                  "default": 500,
+                  "title": "滚动时长",
+                  "inputType": "Number",
+                  "validators": ["required", "number"],
+                  "help": "Duration of the scroll animation in milliseconds"
+                },
+                "_onChildren": {
+                  "type": "boolean",
+                  "required": false,
+                  "title": "在子组块上启用",
+                  "inputType": "Checkbox",
+                  "validators": [],
+                  "help": "Set to false on the article to use trickle at article level"
+                },
+                "_scrollTo": {
+                  "type": "string",
+                  "required": false,
+                  "default": "@block +1",
+                  "title": "滚动至",
+                  "inputType": "Text",
+                  "validators": [],
+                  "help": "设置页面滚动到的位置"
+                },
+                "_button": {
+                  "type": "object",
+                  "required": false,
+                  "title": "按钮属性",
+                  "properties": {
+                    "_isEnabled": {
+                      "type": "boolean",
+                      "required": false,
+                      "title": "启用",
+                      "inputType": "Checkbox",
+                      "validators": []
+                    },
+                    "_styleBeforeCompletion": {
+                      "type": "string",
+                      "required": false,
+                      "enum": ["隐藏", "可见", "禁用"],
+                      "default": "hidden",
+                      "title": "初始可见性",
+                      "inputType": {"type": "Select", "options":["隐藏", "可见", "禁用"]},
+                      "validators": ["required"],
+                      "help": "Set button visibility before completion"
+                    },
+                    "_styleAfterClick": {
+                      "type": "string",
+                      "required": false,
+                      "enum": ["隐藏", "可见", "禁用"],
+                      "default": "hidden",
+                      "title": "完成可见性",
+                      "inputType": {"type": "Select", "options":["隐藏", "可见", "禁用"]},
+                      "validators": ["required"],
+                      "help": "Set button visibility after completion"
+                    },
+                    "_isFullWidth": {
+                      "type": "boolean",
+                      "required": false,
+                      "default": true,
+                      "title": "按钮宽度",
+                      "inputType": "Checkbox",
+                      "validators": []
+                    },
+                    "_autoHide": {
+                      "type": "boolean",
+                      "required": false,
+                      "default": false,
+                      "title": "滚动时隐藏:",
+                      "inputType": "Checkbox",
+                      "validators": [],
+                      "help": "Hides the button when it scrolls from view; not recommended for use in courses that need to be screenreader compatible."
+                    },
+                    "_showEndOfPage": {
+                      "type": "boolean",
+                      "required": false,
+                      "default": true,
+                      "title": "显示页面结束按钮",
+                      "inputType": "Checkbox",
+                      "validators": [],
+                      "help": "When set to `false`, hides any end-of-page button."
+                    },
+                    "_className": {
+                      "type": "string",
+                      "required": false,
+                      "default": "",
+                      "title": "定制Classes类",
+                      "inputType": "Text",
+                      "validators": []
+                    },
+                    "_hasIcon": {
+                      "type": "boolean",
+                      "required": false,
+                      "default": false,
+                      "title": "启用按钮图标",
+                      "inputType": "Checkbox",
+                      "validators": [],
+                      "help": "Displays an icon alongside, or in place of, the Trickle button text. Default icon is a small downwards arrow"
+                    },
+                    "text": {
+                      "type": "string",
+                      "required": false,
+                      "default": "继续",
+                      "title": "按钮文字",
+                      "inputType": "Text",
+                      "validators": [],
+                      "translatable": true
+                    },
+                    "ariaLabel": {
+                      "type": "string",
+                      "required": false,
+                      "default": "继续",
+                      "title": "无障碍按钮",
+                      "inputType": "Text",
+                      "validators": [],
+                      "translatable": true
+                    },
+                    "startText": {
+                      "type": "string",
+                      "required": false,
+                      "default": "开始",
+                      "title": "第一个按钮文字",
+                      "inputType": "Text",
+                      "validators": [],
+                      "help": "Only on articles when 'Enable on Child Blocks' set to true",
+                      "translatable": true
+                    },
+                    "startAriaLabel": {
+                      "type": "string",
+                      "required": false,
+                      "default": "开始",
+                      "title": "第一个无障碍按钮文字",
+                      "inputType": "Text",
+                      "validators": [],
+                      "help": "Only on articles when 'Enable on Child Blocks' set to true",
+                      "translatable": true
+                    },
+                    "finalText": {
+                      "type": "string",
+                      "required": false,
+                      "default": "完成",
+                      "title": "最后一个按钮文字",
+                      "inputType": "Text",
+                      "validators": [],
+                      "help": "Only on articles when 'Enable on Child Blocks' set to true",
+                      "translatable": true
+                    },
+                    "finalAriaLabel": {
+                      "type": "string",
+                      "required": false,
+                      "default": "完成",
+                      "title": "最后一个无障碍按钮文字",
+                      "inputType": "Text",
+                      "validators": [],
+                      "help": "Only on articles when 'Enable on Child Blocks' set to true",
+                      "translatable": true
+                    },
+                    "_component": {
+                      "type": "string",
+                      "required": false,
+                      "default": "trickle-按钮",
+                      "title": "Trickle 插件",
+                      "inputType": "Text",
+                      "validators": []
+                    }
+                  }
+                },
+                "_stepLocking": {
+                  "type": "object",
+                  "required": false,
+                  "title": "步骤锁定参数",
+                  "properties": {
+                    "_isEnabled": {
+                      "type": "boolean",
+                      "required": false,
+                      "default": true,
+                      "title": "启用",
+                      "inputType": "Checkbox",
+                      "validators": []
+                    },
+                    "_isCompletionRequired": {
+                      "type": "boolean",
+                      "required": false,
+                      "default": true,
+                      "title": "必须完成",
+                      "inputType": "Checkbox",
+                      "validators": []
+                    },
+                    "_isLockedOnRevisit": {
+                      "type": "boolean",
+                      "required": false,
+                      "default": false,
+                      "title": "再次访问时锁定",
+                      "inputType": "Checkbox",
+                      "validators": []
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "block": {
+          "type": "object",
+          "properties": {
+            "_trickle": {
+              "title": "涓流",
+              "type": "object",
+              "required": false,
+              "legend": "Trickle",
+              "properties": {
+                "_isEnabled": {
+                  "type": "boolean",
+                  "required": false,
+                  "default": false,
+                  "title": "启用",
+                  "inputType": "Checkbox",
+                  "validators": []
+                },
+                "_isInherited": {
+                  "type": "boolean",
+                  "required": false,
+                  "default": false,
+                  "title": "从父项文章继承设置",
+                  "inputType": "Checkbox"
+                },
+                "_autoScroll": {
+                  "type": "boolean",
+                  "required": false,
+                  "title": "自动滚动",
+                  "inputType": "Checkbox",
+                  "validators": []
+                },
+                "_scrollDuration": {
+                  "type": "number",
+                  "required": true,
+                  "default": 500,
+                  "title": "滚动时长",
+                  "inputType": "Number",
+                  "validators": ["required", "number"],
+                  "help": "Duration of the scroll animation in milliseconds"
+                },
+                "_scrollTo": {
+                  "type": "string",
+                  "required": false,
+                  "default": "@block +1",
+                  "title": "滚动至",
+                  "inputType": "Text",
+                  "validators": [],
+                  "help": "Set how trickle scrolls"
+                },
+                "_button": {
+                  "type": "object",
+                  "required": false,
+                  "title": "按钮参数",
+                  "properties": {
+                    "_isEnabled": {
+                      "type": "boolean",
+                      "required": false,
+                      "default": true,
+                      "title": "启用",
+                      "inputType": "Checkbox",
+                      "validators": []
+                    },
+                    "_styleBeforeCompletion": {
+                      "type": "string",
+                      "required": false,
+                      "enum": ["隐藏", "可见", "禁用"],
+                      "default": "hidden",
+                      "title": "按钮初始化可见性",
+                      "inputType": {"type": "Select", "options":["隐藏", "可见", "禁用"]},
+                      "help": "Set button visibility before completion"
+                    },
+                    "_styleAfterClick": {
+                      "type": "string",
+                      "required": false,
+                      "enum": ["隐藏", "可见", "禁用"],
+                      "default": "hidden",
+                      "title": "按钮完成可见性",
+                      "inputType": {"type": "Select", "options":["隐藏", "可见", "禁用"]},
+                      "help": "Set button visibility after completion"
+                    },
+                    "_isFullWidth": {
+                      "type": "boolean",
+                      "required": false,
+                      "default": true,
+                      "title": "按钮宽度",
+                      "inputType": "Checkbox",
+                      "validators": []
+                    },
+                    "_autoHide": {
+                      "type": "boolean",
+                      "required": false,
+                      "default": false,
+                      "title": "页面滚动时隐藏",
+                      "inputType": "Checkbox",
+                      "validators": [],
+                      "help": "Hides the button when it scrolls from view; not recommended for use in courses that need to be screenreader compatible."
+                    },
+                    "_showEndOfPage": {
+                      "type": "boolean",
+                      "required": false,
+                      "default": true,
+                      "title": "显示页面结束按钮",
+                      "inputType": "Checkbox",
+                      "validators": [],
+                      "help": "When set to `false`, hides this button only if it appears at the end of a page."
+                    },
+                    "_className": {
+                      "type": "string",
+                      "required": false,
+                      "default": "",
+                      "title": "定制Classes类",
+                      "inputType": "Text",
+                      "validators": []
+                    },
+                    "_hasIcon": {
+                      "type": "boolean",
+                      "required": false,
+                      "default": false,
+                      "title": "启用按钮图标",
+                      "inputType": "Checkbox",
+                      "validators": [],
+                      "help": "Displays an icon alongside, or in place of, the Trickle button text. Default icon is a small downwards arrow"
+                    },
+                    "text": {
+                      "type": "string",
+                      "required": false,
+                      "default": "继续",
+                      "title": "按钮文字",
+                      "inputType": "Text",
+                      "validators": [],
+                      "translatable": true
+                    },
+                    "ariaLabel": {
+                      "type": "string",
+                      "required": false,
+                      "default": "继续",
+                      "title": "无障碍按钮",
+                      "inputType": "Text",
+                      "validators": [],
+                      "translatable": true
+                    },
+                    "startText": {
+                      "type": "string",
+                      "required": false,
+                      "default": "开始",
+                      "title": "第一个按钮文字",
+                      "inputType": "Text",
+                      "validators": [],
+                      "help": "Only on articles when 'Enable on Child Blocks' set to true",
+                      "translatable": true
+                    },
+                    "startAriaLabel": {
+                      "type": "string",
+                      "required": false,
+                      "default": "开始",
+                      "title": "第一个无障碍按钮",
+                      "inputType": "Text",
+                      "validators": [],
+                      "help": "Only on articles when 'Enable on Child Blocks' set to true",
+                      "translatable": true
+                    },
+                    "finalText": {
+                      "type": "string",
+                      "required": false,
+                      "default": "完成",
+                      "title": "最后一个按钮文字",
+                      "inputType": "Text",
+                      "validators": [],
+                      "help": "Only on articles when 'Enable on Child Blocks' set to true",
+                      "translatable": true
+                    },
+                    "finalAriaLabel": {
+                      "type": "string",
+                      "required": false,
+                      "default": "完成",
+                      "title": "最后一个无障碍按钮",
+                      "inputType": "Text",
+                      "validators": [],
+                      "help": "Only on articles when 'Enable on Child Blocks' set to true",
+                      "translatable": true
+                    },
+                    "_component": {
+                      "type": "string",
+                      "required": false,
+                      "default": "trickle-按钮",
+                      "title": "Trickle 插件",
+                      "inputType": "Text",
+                      "validators": []
+                    }
+                  }
+                },
+                "_stepLocking": {
+                  "type": "object",
+                  "required": false,
+                  "title": "步骤锁定参数",
+                  "properties": {
+                    "_isEnabled": {
+                      "type": "boolean",
+                      "required": false,
+                      "default": true,
+                      "title": "启用",
+                      "inputType": "Checkbox",
+                      "validators": []
+                    },
+                    "_isCompletionRequired": {
+                      "type": "boolean",
+                      "required": false,
+                      "default": true,
+                      "title": "必须完成",
+                      "inputType": "Checkbox",
+                      "validators": []
+                    },
+                    "_isLockedOnRevisit": {
+                      "type": "boolean",
+                      "required": false,
+                      "default": false,
+                      "title": "再次访问时锁定",
+                      "inputType": "Checkbox",
+                      "validators": []
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "component": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}
